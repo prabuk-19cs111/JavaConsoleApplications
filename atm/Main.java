@@ -19,6 +19,7 @@ class UserAcc{
         int va =wa;
         int ha = va;
         int[] val = new int[]{100,200,500,2000};
+        if(wa<=a){
         if(wa<=b[4]){
             if((a>=wa)&&(wa%100==0)){
                 Boolean x =false;
@@ -69,8 +70,17 @@ class UserAcc{
         ans.add(null);
         return ans;
     }
+}else{
+    System.out.println("Insufficient Balance");
+    ans.add(null);
+    ans.add(null);
+    return ans;
+}
     }
     public static ArrayList<String> deposit(int a){
+        LocalDateTime myDateObj = LocalDateTime.now();
+        DateTimeFormatter myFormatObj = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
+        String formattedDate = myDateObj.format(myFormatObj);
     Scanner sc=new Scanner(System.in);
     int[] den =new int[4];
     System.out.println("Enter the amount to be deposited");
@@ -88,7 +98,7 @@ class UserAcc{
     if((100<=depositamt)&&depositamt%100==0){
         a+=depositamt;
         result.add(Integer.toString(depositamt));
-        result.add("Deposited = "+Integer.toString(depositamt)+" : Balance "+Integer.toString(a));
+        result.add("Deposited = "+Integer.toString(depositamt)+" : Balance "+Integer.toString(a)+" at "+formattedDate);
         result.add(Integer.toString(den[0]));
         result.add(Integer.toString(den[1]));
         result.add(Integer.toString(den[2]));
@@ -111,6 +121,9 @@ class UserAcc{
 
 
 public static ArrayList<String> AmountTransfer(ArrayList<UserAcc> x ,int fromuser , int touser){
+    LocalDateTime myDateObj = LocalDateTime.now();
+        DateTimeFormatter myFormatObj = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
+        String formattedDate = myDateObj.format(myFormatObj);
     ArrayList<String> result =new ArrayList<>();
     System.out.println("Enter amount To transfer : ");
     Scanner sc = new Scanner(System.in);
@@ -118,8 +131,8 @@ public static ArrayList<String> AmountTransfer(ArrayList<UserAcc> x ,int fromuse
     if((amount>0) && (amount<x.get(fromuser).balance)){
         System.out.println("Amount " +amount+ " transferred successfully from "+x.get(fromuser).username+" to "+x.get(touser).username );
         result.add(Integer.toString(amount));
-        result.add(Integer.toString(amount)+" transferred to "+x.get(touser).username+" available balance : "+Integer.toString(x.get(fromuser).balance-amount ));
-        result.add(Integer.toString(amount)+" transferred from "+x.get(fromuser).username+" available balance : "+Integer.toString(x.get(touser).balance+amount));
+        result.add(Integer.toString(amount)+" transferred to "+x.get(touser).username+" available balance : "+Integer.toString(x.get(fromuser).balance-amount )+"at"+formattedDate);
+        result.add(Integer.toString(amount)+" transferred from "+x.get(fromuser).username+" available balance : "+Integer.toString(x.get(touser).balance+amount)+"at"+formattedDate);
         return result;
     }
     else{
@@ -245,13 +258,13 @@ class Main{
         Admin ad2=new Admin();
         Admin ad3=new Admin();
         a.username="usera";
-        a.balance=1000;
+        a.balance=10000;
         a.pin="1111";
         b.username="userb";
-        b.balance=2000;
+        b.balance=15000;
         b.pin="2222";
         c.username="userc";
-        c.balance=3000;
+        c.balance=9000;
         c.pin="3333";
         ad1.adminname="admin1";
         ad1.pin="111";
