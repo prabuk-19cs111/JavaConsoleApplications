@@ -73,11 +73,7 @@ class Splitwise{
         contact_list.add(c3);
         contact_list.add(c4);
         contact_list.add(c5);
-    //    ArrayList<Contact> grouplistx = new ArrayList<>();
-          //for(int i=0;i<3;i++){
-      //      grouplistx.add(contact_list.get(i));
-        //}
-
+    
         ArrayList<Contact> newgroup = new ArrayList<>();
         ArrayList<HashMap<String,String>> transaction_list = new ArrayList<>();
         Boolean whole_exit = false;
@@ -120,7 +116,7 @@ class Splitwise{
 
                                         HashMap<String, String> y = new HashMap<>();
                                         for (int i = 0; i < contact_list.size(); i++) {
-                                            System.out.println(i + "." + contact_list.get(i).name);
+                                            System.out.println((i+1) + "." + contact_list.get(i).name);
                                         }
                                         System.out.println("Select the contact you need to add expense : ");
                                         int select_contact = sc.nextInt();
@@ -150,9 +146,22 @@ class Splitwise{
                                         System.out.println(transaction_list);
                                         }
                                         else{
-                                            for(int i=0;i<contact_list.size();i++){
-                                                System.out.println(i+ " . "+contact_list.get(i).name);
+                                            if(users.get(u).grouplistx.size()!=0){
+                                                for(int i=0;i<contact_list.size();i++){
+                                                    Boolean h =true;
+                                                for(int k=0;k<users.get(u).grouplistx.size();k++){
+                                                    if(contact_list.get(i).name.equals(users.get(u).grouplistx.get(k).name)){
+                                                        h=false;
+                                                   }
+                                                     }
+                                                if(h){System.out.println((i+1)+ " . "+contact_list.get(i).name);}
+                                                  }
                                             }
+                                            else{
+                                                for(int i=0;i<contact_list.size();i++){
+                                                System.out.println((i+1)+ " . "+contact_list.get(i).name);
+                                                       }
+                                              }
                                             System.out.println("Number of contacts to be grouped");
                                             int n=sc.nextInt();
                                             System.out.println("Select contacts to be grouped");
@@ -162,8 +171,12 @@ class Splitwise{
                                                 
                                             }
                                             for(int k=0;k<n;k++){
+                                    
                                                 users.get(u).grouplistx.add(contact_list.get(arr[k]));
                                                 
+                                            }
+                                            for(int i=0;i<users.get(u).grouplistx.size();i++){
+                                                System.out.println((i+1)+ " . "+users.get(u).grouplistx.get(i).name);
                                             }
                                             System.out.println(users.get(u).grouplistx);
                                              
@@ -207,9 +220,22 @@ class Splitwise{
 
                                     break;
 
-                                    case 3:for(int i=0;i<contact_list.size();i++){
-                                        System.out.println(i+ " . "+contact_list.get(i).name);
+                                    case 3:if(users.get(u).grouplistx.size()!=0){
+                                        for(int i=0;i<contact_list.size();i++){
+                                            Boolean h =true;
+                                        for(int k=0;k<users.get(u).grouplistx.size();k++){
+                                            if(contact_list.get(i).name.equals(users.get(u).grouplistx.get(k).name)){
+                                                h=false;
+                                           }
+                                             }
+                                        if(h){System.out.println((i+1)+ " . "+contact_list.get(i).name);}
+                                          }
                                     }
+                                    else{
+                                        for(int i=0;i<contact_list.size();i++){
+                                        System.out.println((i+1)+ " . "+contact_list.get(i).name);
+                                               }
+                                      }
                                     System.out.println("Number of contacts to be grouped");
                                     int n=sc.nextInt();
                                     System.out.println("Select contacts to be grouped");
@@ -219,15 +245,16 @@ class Splitwise{
                                         
                                     }
                                     for(int k=0;k<n;k++){
+                            
                                         users.get(u).grouplistx.add(contact_list.get(arr[k]));
                                         
                                     }
                                     for(int i=0;i<users.get(u).grouplistx.size();i++){
-                                        System.out.println(i+ " . "+users.get(u).grouplistx.get(i).name);
+                                        System.out.println((i+1)+ " . "+users.get(u).grouplistx.get(i).name);
                                     }
                                  break; 
                                  case 4 :  for(int i=0;i<users.get(u).grouplistx.size();i++){
-                                    System.out.println("Refer code :"+i+ " for "+users.get(u).grouplistx.get(i).name);
+                                    System.out.println("Refer code :"+(i+1)+ " for "+users.get(u).grouplistx.get(i).name);
                                  }
                                     System.out.println("Number of contacts to be deleted from group");
                                     int rn=sc.nextInt();
@@ -242,7 +269,7 @@ class Splitwise{
                                         
                                     }
                                     for(int c=0;c<users.get(u).grouplistx.size();c++){
-                                        System.out.println(c+ " . "+users.get(u).grouplistx.get(c).name);
+                                        System.out.println((c+1)+ " . "+users.get(u).grouplistx.get(c).name);
                                     }
                          break; 
                          case 5:for(int i=0;i<contact_list.size();i++){
