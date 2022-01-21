@@ -213,7 +213,7 @@ class Splitwise{
                                             break;
                                         }
                                         else{
-                                            System.out.println("Enter valid amount");
+                                            System.out.println("Enter valid option");
                                         }
 
                                     
