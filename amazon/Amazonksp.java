@@ -258,9 +258,10 @@ public static Merchant createmerchant(){
         merchant_list.add(m2);
         m1.name="apple";
         m1.password="aaaa";
+        m1.approval=true;
         m2.name="samsung";
         m2.password="ssss";
-
+        m2.approval=true;
         HashMap<String,String> x = new HashMap<>();
         x.put("name", "rog");
         x.put("price","100000");
@@ -411,7 +412,9 @@ public static Merchant createmerchant(){
                         int cho = sc.nextInt(); 
                         switch(cho){
                             case 1:for(int j =0;j<merchant_list.size();j++){
+                                
                                 if(merchant_list.get(j).approval){
+                                
                                     System.out.println(merchant_list.get(j).products);
                                 }
                             }
@@ -457,4 +460,3 @@ public static Merchant createmerchant(){
         }
     }
 }
-
