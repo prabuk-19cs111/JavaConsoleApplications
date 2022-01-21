@@ -104,7 +104,7 @@ class Main{
         int trainid = sc.nextInt();
         for(int i=0;i<x.size();i++){
             if(x.get(i).id==trainid){
-                res=trainid;
+                res=i;
             }
         }
         return res;
