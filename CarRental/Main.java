@@ -34,7 +34,7 @@ class User{
    
 }
 
-class Cab{
+public class Main{
     public static int loginuser(ArrayList<User> x){
         Scanner sc = new Scanner(System.in);
         int ans=-1;
