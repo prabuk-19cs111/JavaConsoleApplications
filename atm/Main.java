@@ -117,9 +117,6 @@ class UserAcc{
     }
 }
 
-
-
-
 public static ArrayList<String> AmountTransfer(ArrayList<UserAcc> x ,int fromuser , int touser){
     LocalDateTime myDateObj = LocalDateTime.now();
         DateTimeFormatter myFormatObj = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
@@ -176,7 +173,7 @@ else{
 }
     }
 }
-class Main{
+public class Main{
 
     public static ArrayList<Integer> loginuser(ArrayList<UserAcc> x){
         Scanner sc = new Scanner(System.in);
