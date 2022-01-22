@@ -25,10 +25,6 @@ class UserAcc{
              }
         }
     }
-
-   
-
-
 }
 
 
@@ -120,7 +116,7 @@ class Admin{
     }
 
 }
-class Library{
+public class Main{
 
     public static ArrayList<Integer> loginuser(ArrayList<UserAcc> x){
         Scanner sc = new Scanner(System.in);
