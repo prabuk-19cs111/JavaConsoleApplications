@@ -1,5 +1,4 @@
 import java.util.*;
-
 class User{
     String name;
     String password;
@@ -74,10 +73,7 @@ class Merchant{
         res.put("name",name);
         res.put("category",ct.get(ch));
         return res;
-
-        
     }
-
     public static ArrayList<String> updprod(ArrayList<HashMap<String,String>> p){
         Scanner sc =new Scanner(System.in);
         ArrayList<String> res =new ArrayList<>();
@@ -100,14 +96,8 @@ class Merchant{
         System.out.println("Enter what need to be updated ");
         String v=sc.next();
         res.add(v);
-        return res;
-
-
-        
-
-        
-    }
-    
+        return res;      
+    }    
 }
 
 class Admin{
@@ -161,10 +151,7 @@ class Admin{
 
 }
 
-
-
-
-class Amazonksp {
+public class Main{
     public static User createuser(){
         Scanner sc = new Scanner(System.in);
         User x =new User();
@@ -173,7 +160,6 @@ class Amazonksp {
         System.out.println("Enter Your Password : ");
         x.password = sc.next();
         return x;
-
 }
 
 public static Merchant createmerchant(){
@@ -185,12 +171,8 @@ public static Merchant createmerchant(){
     x.password = sc.next();
     x.approval=false;
     return x;
-
 }
-
-
-
-    public static int adminlogin(ArrayList<Admin> x){
+ public static int adminlogin(ArrayList<Admin> x){
         int val=-1;
         Scanner sc = new Scanner(System.in);
         System.out.println("Enter Name : ");
@@ -219,10 +201,7 @@ public static Merchant createmerchant(){
         return val;
         
     } 
-   
-
-
-    public static int userlogin(ArrayList<User> x){
+   public static int userlogin(ArrayList<User> x){
         int val=-1;
         Scanner sc = new Scanner(System.in);
         System.out.println("Enter Name : ");
@@ -277,8 +256,8 @@ public static Merchant createmerchant(){
         ArrayList<String> categ =new ArrayList<>();
         ArrayList<User> users =new ArrayList<>();
         User u1 = new User();
-        u1.name = "user1";
-        u1.password = "1111";
+        u1.name = "usera";
+        u1.password = "aaaa";
         users.add(u1);
 
         Boolean whole_exit_status=false;
@@ -319,7 +298,6 @@ public static Merchant createmerchant(){
                             break;
                             case 3: for(int p=0;p<merchant_list.size();p++){
                                 System.out.println(merchant_list.get(p).products);
-
                             }
                             break;
                             case 4:
@@ -328,11 +306,8 @@ public static Merchant createmerchant(){
 
                             case 5: admin_exit_status=true;
                             break;
-
-
                             default:System.out.println("Enter valid choice");
                         }
-
                     }
                 }
                 else{
@@ -379,11 +354,7 @@ public static Merchant createmerchant(){
                             break;
                             case 5:merchant_exit_status=true;
                             break;
-
-
                             default:System.out.println("Enter valid choice");
-
-
                         }
                     }
                 }
@@ -450,8 +421,6 @@ public static Merchant createmerchant(){
             }
         }
         break;
-            
-
                 case 4: whole_exit_status=true;
                 break;
 
