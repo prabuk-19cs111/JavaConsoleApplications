@@ -256,13 +256,13 @@ public class Main{
         Admin ad3=new Admin();
         a.username="usera";
         a.balance=10000;
-        a.pin="1111";
+        a.pin="aaaa";
         b.username="userb";
         b.balance=15000;
-        b.pin="2222";
+        b.pin="bbbb";
         c.username="userc";
         c.balance=9000;
-        c.pin="3333";
+        c.pin="cccc";
         ad1.adminname="admin1";
         ad1.pin="111";
         ad2.adminname="admin2";
@@ -409,4 +409,4 @@ public class Main{
         System.out.println("visit again");
         }
 }
-    
+   
