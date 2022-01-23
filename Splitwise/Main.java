@@ -2,17 +2,11 @@ import java.util.*;
 class User{
     String name;
     String password;
-      int wallet;
     ArrayList<User> friendslist = new ArrayList<>();
     ArrayList<User> requests = new ArrayList<>();
     ArrayList<Expense> expenses = new ArrayList<>();
     ArrayList<Group> groups = new ArrayList<>();
-  }
-
-class Group{
-    String name;
-    ArrayList<User> friendsingroup = new ArrayList<>();
-    ArrayList<GroupExpense> groupexpenses = new ArrayList<>();
+    int wallet;
 }
 class Expense{
     String name;
@@ -27,7 +21,11 @@ class GroupExpense{
     ArrayList<User> completed = new ArrayList<>();
     int amount;
 }
-
+class Group{
+    String name;
+    ArrayList<User> friendsingroup = new ArrayList<>();
+    ArrayList<GroupExpense> groupexpenses = new ArrayList<>();
+}
 public class Main{
     public static User createuser(){
         Scanner sc = new Scanner(System.in);
@@ -51,12 +49,12 @@ public class Main{
             System.out.println(i+" - Group Name : "+x.groups.get(i).name);
         }
         System.out.println("Enter the Group : ");
-        int gind = sc.nextInt();
-        res.add(gind);
+        int grupname = sc.nextInt();
+        res.add(grupname);
         for(int i=0;i<x.friendslist.size();i++){
             Boolean b  = true;
-            for(int j=0;j<x.groups.get(gind).friendsingroup.size();j++){
-            if(x.friendslist.get(i).name.equals(x.groups.get(gind).friendsingroup.get(j).name)){
+            for(int j=0;j<x.groups.get(grupname).friendsingroup.size();j++){
+            if(x.friendslist.get(i).name.equals(x.groups.get(grupname).friendsingroup.get(j).name)){
                 b=false;
             }
         }
@@ -64,13 +62,13 @@ public class Main{
             System.out.println(i+" - "+x.friendslist.get(i).name);
         }
         }
-        System.out.println("Enter the Numer of friendslist : ");
-        int nos = sc.nextInt();
-        res.add(nos);
-        for(int i=0;i<nos;i++){
+        System.out.println("Enter the Number of friends to be added in friendlist : ");
+        int nof = sc.nextInt();
+        res.add(nof);
+        for(int i=0;i<nof;i++){
             int k = sc.nextInt();
-            for(int j=0;j<x.groups.get(gind).friendsingroup.size();j++){
-                if(!x.friendslist.get(k).name.equals(x.groups.get(gind).friendsingroup.get(j).name)){
+            for(int j=0;j<x.groups.get(grupname).friendsingroup.size();j++){
+                if(!x.friendslist.get(k).name.equals(x.groups.get(grupname).friendsingroup.get(j).name)){
                     res.add(k);
                 }
                 else{
@@ -219,13 +217,13 @@ public class Main{
         grup.name = name;
         grup.friendsingroup.add(y);
         for(int i=0;i<x.size();i++){
-                System.out.println(i+"-"+x.get(i).name);
+                System.out.println(i+" __ "+x.get(i).name);
         }
         System.out.println("Enter the no.of friends need to be added : ");
-        int nos = sc.nextInt();
-        if(nos<=x.size()&&nos>0){
+        int nof = sc.nextInt();
+        if(nof<=x.size()&&nof>0){
         System.out.println("Enter the users need to be added : ");
-        for(int i=0;i<nos;i++){
+        for(int i=0;i<nof;i++){
             int k = sc.nextInt();
             for(int j=0;j<grup.friendsingroup.size();j++){
                 if(!x.get(k).name.equals(grup.friendsingroup.get(j).name)){
@@ -359,15 +357,15 @@ public class Main{
                                 for(int i=0;i<am.get(1);i++){
                                     users.get(z).groups.get(am.get(0)).friendsingroup.add(users.get(z).friendslist.get(am.get(i+2)));
                                 }
-                                int gind=-1;
+                                int grupname=-1;
                                 for(int i=0;i<am.get(1);i++){
                                     for(int j=0;j<users.size();j++){
                                         if(users.get(j).name.equals(users.get(z).friendslist.get(am.get(i+2)).name)){
-                                        gind = j;
+                                        grupname = j;
                                         }
                                     }
-                                    users.get(gind).groups.add(users.get(z).groups.get(am.get(0)));
-                                    System.out.println(users.get(gind).name);
+                                    users.get(grupname).groups.add(users.get(z).groups.get(am.get(0)));
+                                    System.out.println(users.get(grupname).name);
                                 }
                             }
                             System.out.println("________________________________________");
