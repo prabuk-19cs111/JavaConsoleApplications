@@ -1,9 +1,8 @@
 import java.util.*;
-
 class User{
     String name;
     String password;
-    int wallet=5000;
+    int wallet;
     ArrayList<Ticket> Booked = new ArrayList<>();
 }
 class Admin{
@@ -20,26 +19,120 @@ class Train{
 }
 class Ticket{
     int  train;
-    ArrayList<Integer> seatnumber = new ArrayList<>();
+    ArrayList<Integer> seatno = new ArrayList<>();
     int from;
     int to;
     int amount;
 }
 
 public class Main{
+    
+     public static int adminlogin(ArrayList<Admin> x){
+        Scanner sc = new Scanner(System.in);
+        int res = -1;
+        System.out.println("Enter Your Name : ");
+        String name = sc.next();
+        System.out.println("Enter Your password : ");
+        String password = sc.next();
+        for(int i=0;i<x.size();i++){
+            if(x.get(i).name.equals(name)&&x.get(i).password.equals(password)){
+                res=i;
+            }
+        }
+        return res;
+    }
+    public static int userlogin(ArrayList<User> x){
+        Scanner sc = new Scanner(System.in);
+        int res = -1;
+        System.out.println("Enter Your Name : ");
+        String name = sc.next();
+        System.out.println("Enter Your password : ");
+        String password = sc.next();
+        for(int i=0;i<x.size();i++){
+            if(x.get(i).name.equals(name)&&x.get(i).password.equals(password)){
+                res=i;
+            }
+        }
+        return res;
+    }
+    public static User reguser(ArrayList<User> x){
+        Scanner sc = new Scanner(System.in);
+        User y = new User();
+        y.wallet=0;
+        System.out.println("Enter Your username : ");
+        String name = sc.nextLine();
+        System.out.println("Enter Your password : ");
+        String password = sc.nextLine();
+        for(int i=0;i<x.size();i++){
+            if(x.get(i).name==name){
+                y.wallet = -1;
+            }
+        }
+        y.name = name;
+        y.password = password;
+        return y;
+    }
+    public static ArrayList<Integer> edittrain(ArrayList<Train> x){
+        Scanner sc = new Scanner(System.in);
+        ArrayList<Integer> res = new ArrayList<>();
+        for(int i=0;i<x.size();i++){
+            System.out.println("Train Id : "+x.get(i).id);
+            System.out.println("Train name : "+x.get(i).name);
+            System.out.println("------------------------");
+        }
+        System.out.println("Choose The Train You Want To Edit : ");
+        int id = sc.nextInt();
+        System.out.println("1-Ticket Amount");
+        System.out.println("2-Number Of Seats");
+        System.out.println("3-Number Of Stations");
+        System.out.println("Enter The Field You Want To Enter (1-3) : ");
+        int fie = sc.nextInt();
+        System.out.println("Enter the value You want It to be Edited : ");
+        int val = sc.nextInt();
+        int ind = -1;
+        for(int i=0;i<x.size();i++){
+            if(x.get(i).id==id){
+                ind = i; 
+            }
+        }
+        res.add(ind);
+        if(ind!=-1){
+            res.add(fie);
+            res.add(val);
+        }
+        return res;
+    }
+    public static int removetrain(ArrayList<Train> x){
+        Scanner sc = new Scanner(System.in);
+        int res = -1;
+        for(int i=0;i<x.size();i++){
+            System.out.println("Train ID : "+x.get(i).id);
+            System.out.println("Train Name : "+x.get(i).name);
+            System.out.println("---------------------------");
+        }
+        System.out.println("Enter the Train ID : ");
+        int rid = sc.nextInt();
+        for(int i=0;i<x.size();i++){
+            if(x.get(i).id==rid){
+                res=i;
+            }
+        }
+        return res;
+    }
     public static Train addtrain(ArrayList<Train> x){
         Scanner sc = new Scanner(System.in);
         Train t = new Train();
         System.out.println("Enter Train Id : ");
         int id = sc.nextInt();
         System.out.println("Enter Train Name : ");
-        t.name = sc.nextLine();
+        t.name = sc.next();
+        System.out.println("Enter Number Of Seats : ");
+        int seats = sc.nextInt();
         System.out.println("Enter Ticket rate : ");
         int trate = sc.nextInt();
         System.out.println("Enter Number Of Stations : ");
         int stat = sc.nextInt();
-        System.out.println("Enter Number Of Seats : ");
-        int seats = sc.nextInt();
+        
         Boolean b = true;
         for(int i=0;i<x.size();i++){
             if(x.get(i).id==id){
@@ -57,105 +150,9 @@ public class Main{
         else{
             t.id=-1;
         }
-
-        return t;
-        
+    return t;
     }
-
-    public static ArrayList<Integer> edittrain(ArrayList<Train> x){
-        Scanner sc = new Scanner(System.in);
-        ArrayList<Integer> res = new ArrayList<>();
-        for(int i=0;i<x.size();i++){
-            System.out.println("Train Id : "+x.get(i).id);
-            System.out.println("Train name : "+x.get(i).name);
-            System.out.println("_________________________________________________");
-        }
-        System.out.println("Choose The Train To Edited : ");
-        int id = sc.nextInt();
-        System.out.println("1-Ticket Amount");
-        System.out.println("2-Number Of Seats");
-        System.out.println("3-Number Of Stations");
-        System.out.println("Enter The choice to be edited : ");
-        int f = sc.nextInt();
-        System.out.println("Enter the value to be Edited : ");
-        int v = sc.nextInt();
-        int ind = -1;
-        for(int i=0;i<x.size();i++){
-            if(x.get(i).id==id){
-                ind = i; 
-            }
-        }
-        res.add(ind);
-        if(ind!=-1){
-            res.add(f);
-            res.add(v);
-        }
-        return res;
-    }
-    public static int removetrain(ArrayList<Train> x){
-        Scanner sc = new Scanner(System.in);
-        int res = -1;
-        for(int i=0;i<x.size();i++){
-            System.out.println("Train ID : "+x.get(i).id);
-            System.out.println("Train Name : "+x.get(i).name);
-            System.out.println("_________________________________________________");
-        }
-        System.out.println("Enter the Train ID : ");
-        int trainid = sc.nextInt();
-        for(int i=0;i<x.size();i++){
-            if(x.get(i).id==trainid){
-                res=i;
-            }
-        }
-        return res;
-    }
-    
-    public static int adminlogin(ArrayList<Admin> x){
-        Scanner sc = new Scanner(System.in);
-        int res = -1;
-        System.out.println("Enter Your Name : ");
-        String name = sc.next();
-        System.out.println("Enter Your Password : ");
-        String password = sc.next();
-        for(int i=0;i<x.size();i++){
-            if(x.get(i).name.equals(name)&&x.get(i).password.equals(password)){
-                res=i;
-            }
-        }
-        return res;
-    }
-    public static int userlogin(ArrayList<User> x){
-        Scanner sc = new Scanner(System.in);
-        int res = -1;
-        System.out.println("Enter Your Name : ");
-        String name = sc.next();
-        System.out.println("Enter Your Password : ");
-        String password = sc.next();
-        for(int i=0;i<x.size();i++){
-            if(x.get(i).name.equals(name)&&x.get(i).password.equals(password)){
-                res=i;
-            }
-        }
-        return res;
-    }
-    public static User reguser(ArrayList<User> x){
-        Scanner sc = new Scanner(System.in);
-        User y = new User();
-        y.wallet=0;
-        System.out.println("Enter Your username : ");
-        String name = sc.nextLine();
-        System.out.println("Enter Your Password : ");
-        String password = sc.nextLine();
-        for(int i=0;i<x.size();i++){
-            if(x.get(i).name==name){
-                y.wallet = -1;
-            }
-        }
-        y.name = name;
-        y.password = password;
-        return y;
-       
-    }
+   
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         ArrayList<Train> trains = new ArrayList<>();
@@ -163,24 +160,24 @@ public class Main{
         ArrayList<Admin> admins = new ArrayList<>();
         Train t1 = new Train();
         t1.id = 1;
-        t1.amount = 50;
-        t1.name = "Bombay express";
-        t1.stations = 4; 
-        t1.seats  =60;
+        t1.amount = 45;
+        t1.name = "Maharaja express";
+        t1.stations = 7; 
+        t1.seats  =15;
         int[][] a = new int[t1.stations][t1.seats];
         t1.arr = a;
         User u1 = new User();
-        User u2 = new User();
-        User u3 = new User();
         u1.name = "usera";
         u1.password = "aaaa";
         u1.wallet = 5000;
+        User u2 = new User();
         u2.name = "userb";
         u2.password = "bbbb";
-        u2.wallet = 10000;
+        u2.wallet = 7000;
+        User u3 = new User();
         u3.name = "userc";
         u3.password = "cccc";
-        u3.wallet = 1000;
+        u3.wallet = 10000;
         Admin a1 = new Admin();
         a1.name = "admin1";
         a1.password = "111";
@@ -202,13 +199,12 @@ public class Main{
             switch(ch){
                 case 1:int al = adminlogin(admins);
                 if(al!=-1){
-                    Boolean admin_exit_status = false;
-                    System.out.println("Welcome " +admins.get(al).name);
-                    while(!admin_exit_status){
-                        System.out.println("1-Add Trains");
-                        System.out.println("2-Remove Trains");
-                        System.out.println("3-Edit Train");
-                        System.out.println("4-View Trains and Availability");
+                    Boolean admin_exit = false;
+                    while(!admin_exit){
+                        System.out.println("1-Add trains");
+                        System.out.println("2-Remove trains");
+                        System.out.println("3-Edit train");
+                        System.out.println("4-View trains and seat availability");
                         System.out.println("5-Exit");
                         int ach = sc.nextInt();
                         switch(ach){
@@ -218,7 +214,7 @@ public class Main{
                                 System.out.println("Train Added Successfully");
                             }
                             else{
-                                System.out.println("Entered details are not valid");
+                                System.out.println("Entered details are invalid. seats and stations should be >1 , ticket price should be >50");
                             }
                             break;
                             case 2:int rt = removetrain(trains);
@@ -236,19 +232,19 @@ public class Main{
                                         trains.get(et.get(0)).amount = et.get(2);
                                     }
                                     else{
-                                        System.out.println("Invalid Ticket Price");
+                                        System.out.println("Invalid Ticket Price . ticket price should be >50");
                                     }
                                         break;
                                     case 2:if(et.get(2)>1){
                                         trains.get(et.get(0)).seats = et.get(2);
                                     }else{
-                                        System.out.println("Invalid Number of seats");
+                                        System.out.println("Invalid Number of seats (should be >1) ");
                                     }
                                         break;
                                     case 3:if(et.get(2)>1){
                                         trains.get(et.get(0)).stations = et.get(2);
                                     }else{
-                                        System.out.println("Invalid Number of stations");
+                                        System.out.println("Invalid Number of stations (should be >1)");
                                     }
                                         break;
                                 }
@@ -262,21 +258,23 @@ public class Main{
                                 System.out.println(trains.get(i).name);
                                 for(int j=0;j<trains.get(i).arr.length;j++){
                                     for(int k=0;k<trains.get(i).arr[0].length;k++){
-                                        System.out.print(trains.get(i).arr[j][k]);
+                                        System.out.print(trains.get(i).arr[j][k]+" ");
                                     }
                                     System.out.println();
                                 }
                             }
+                            System.out.println("__________________________________________");
+                            System.out.println("0 represent unoccupied seats");
+                            System.out.println("1 represent occupied seats");
                             break;
-                            case 5:admin_exit_status =true;
+                            case 5:admin_exit =true;
                             break;
                             default:System.out.println("Enter a valid option : ");
                         }
                     }
                 }
                 else{
-                    System.out.println("Enter valid adminname & password ");
-                    Sysetm.out.println("please login again");
+                    System.out.println("Invalid adminname or password");
                 }
                 break;
                 case 2:System.out.println("1-New User");
@@ -293,9 +291,9 @@ public class Main{
                     break;
                     case 2:int ul = userlogin(users);
                     if(ul!=-1){
-                        System.out.println("Welcome " +users.get(ul).name);
-                        Boolean user_exit_status=false;
-                        while(!user_exit_status){
+                        System.out.println("Login Successful");
+                        Boolean user_exit=false;
+                        while(!user_exit){
                             System.out.println("1-Book Tickets");
                             System.out.println("2-Cancel Tickets");
                             System.out.println("3-View Tickets");
@@ -309,30 +307,42 @@ public class Main{
                                 for(int i=0;i<trains.size();i++){
                                     System.out.println(trains.get(i).id);
                                     System.out.println(trains.get(i).name);
-                                    System.out.println("_________________________________________________");
+                                    System.out.println("__________________________________________");
                                 }
                                 System.out.println("Select The Train You Want To Book");
-                                int trainidbook = sc.nextInt();
-                                System.out.println("_________________________________________________");
+                                int trID = sc.nextInt();
+                                System.out.println("__________________________________________");
                                 int ind=-1;
                                 for(int i=0;i<trains.size();i++){
-                                    if(trains.get(i).id==trainidbook){
+                                    if(trains.get(i).id==trID){
                                         ind = i;
                                     }
                                 }
                                 System.out.println("Number of Seats in train : "+trains.get(ind).arr[0].length);
-                                System.out.println("Enter The number of seats to be booked: ");
-                                int numberofseats = sc.nextInt();
-                                System.out.println("_________________________________________________");
-                                if(numberofseats<trains.get(ind).arr[0].length&&numberofseats>0){
+                                System.out.println("Enter The number of seats : ");
+                                int nos = sc.nextInt();
+                                System.out.println("__________________________________________");
+                                if(nos<trains.get(ind).arr[0].length&&nos>0){
                                     ArrayList<Integer> seats = new ArrayList<>(); 
-                                    System.out.println("Enter the seat number : ");
-                                    for(int i=0;i<numberofseats;i++){
+                                    System.out.println("Enter the seat no's : ");
+                                    for(int i=0;i<trains.size();i++){
+                                        System.out.println(trains.get(i).name);
+                                        for(int j=0;j<trains.get(i).arr.length;j++){
+                                            for(int k=0;k<trains.get(i).arr[0].length;k++){
+                                                System.out.print(trains.get(i).arr[j][k]+" ");
+                                            }
+                                            System.out.println();
+                                        }
+                                    }
+                                    System.out.println("__________________________________________");
+                                    System.out.println("0 represent unoccupied seats");
+                                    System.out.println("1 represent occupied seats");
+                                    for(int i=0;i<nos;i++){
                                         seats.add(sc.nextInt());
                                     }
-                                    System.out.println("_________________________________________________");
+                                    System.out.println("__________________________________________");
                                     Boolean b=true;
-                                    for(int i=0;i<numberofseats;i++){
+                                    for(int i=0;i<nos;i++){
                                         if(seats.get(i)<0&&seats.get(i)>=trains.get(ind).seats){
                                             b=false;
                                         }
@@ -342,66 +352,65 @@ public class Main{
                                     for(int i=0;i<trains.get(ind).arr.length;i++){
                                         System.out.println(i);
                                     }
-                                    System.out.println("Enter the pickup station : ");
+                                    System.out.println("Enter the boarding station : ");
                                     int from = sc.nextInt();
-                                    System.out.println("_________________________________________________");
-                                    System.out.println("Enter the to drop station : ");
+                                    System.out.println("__________________________________________");
+                                    System.out.println("Enter the destination station : ");
                                     int to = sc.nextInt();
-                                    System.out.println("_________________________________________________");
+                                    System.out.println("__________________________________________");
                                     if(from>=0&&from<trains.get(ind).stations&&to>0&&to<trains.get(ind).stations&&from<to){
                                         Boolean avail = true;
                                         for(int i=0;i<seats.size();i++){
-                                            for(int j=from;j<=to;j++){
-                                                if(trains.get(ind).arr[j][i]!=0){
+                                            for(int j=from;j<to;j++){
+                                                if(trains.get(ind).arr[j][seats.get(i)]!=0){
                                                     avail=false;
                                                 }
                                             }
                                         }
                                         if(avail){
                                             System.out.println("Tickets are available");
-                                            int tamount = (trains.get(ind).amount*numberofseats*(to-from+1)/(trains.get(ind).stations));
-                                            System.out.println("Total amount need to be paid is : "+tamount);
-                                            System.out.println("_____________________________________________");
+                                            int tamount = (trains.get(ind).amount*nos*(to-from+1)/(trains.get(ind).stations));
+                                            System.out.println("Total Cost is : "+tamount);
+                                            System.out.println("__________________________________________");
                                             System.out.println("1-Pay From Wallet");
-                                            System.out.println("2-Pay By Other Means");
+                                            System.out.println("2-Pay in cash or other");
                                             System.out.println("3-Not Now");
                                             int pay = sc.nextInt();
                                             switch(pay){
                                                 case 1:if(users.get(ul).wallet>=tamount){
                                                     for(int i=0;i<seats.size();i++){
                                                         for(int j=from;j<to;j++){
-                                                            trains.get(ind).arr[j][i]=1;
+                                                            trains.get(ind).arr[j][seats.get(i)]=1;
                                                         }
                                                     }
-                                                    Ticket t = new Ticket();
-                                                    t.amount = tamount;
-                                                    t.from = from;
-                                                    t.to = to;
-                                                    t.seatnumber = seats;
-                                                    t.train = trains.get(ind).id;
-                                                    users.get(ul).Booked.add(t);
+                                                    Ticket tick = new Ticket();
+                                                    tick.amount = tamount;
+                                                    tick.from = from;
+                                                    tick.to = to;
+                                                    tick.seatno = seats;
+                                                    tick.train = trains.get(ind).id;
+                                                    users.get(ul).Booked.add(tick);
                                                     users.get(ul).wallet-=tamount;
-                                                    System.out.println("Booked Successfully");
+                                                    System.out.println("ticket Booked Successfully enjoy your journey ");
                                                 }
                                                 else{
                                                     System.out.println("Insufficient Balance");
                                                 }
-                                                System.out.println("_____________________________________________");
+                                                System.out.println("__________________________________________");
                                                 break;
                                                 case 2:for(int i=0;i<seats.size();i++){
                                                     for(int j=from;j<=to;j++){
                                                         trains.get(ind).arr[j][i]=1;
                                                     }
                                                 }
-                                                Ticket t = new Ticket();
-                                                t.amount = tamount;
-                                                t.from = from;
-                                                t.to = to;
-                                                t.train = trains.get(ind).id;
-                                                users.get(ul).Booked.add(t);
+                                                Ticket tick = new Ticket();
+                                                tick.amount = tamount;
+                                                tick.from = from;
+                                                tick.to = to;
+                                                tick.train = trains.get(ind).id;
+                                                users.get(ul).Booked.add(tick);
                                             }
                                             break;
-                                            
                                         }
                                         else{
                                             System.out.println("Tickets Not Available");
@@ -424,12 +433,12 @@ public class Main{
                                     System.out.println("From : "+users.get(ul).Booked.get(i).from);
                                     System.out.println("To : "+users.get(ul).Booked.get(i).to);
                                     System.out.print("Booked Seats : ");
-                                    for(int j=0;j<users.get(ul).Booked.get(i).seatnumber.size();j++){
-                                        System.out.print(users.get(ul).Booked.get(i).seatnumber.get(j));
+                                    for(int j=0;j<users.get(ul).Booked.get(i).seatno.size();j++){
+                                        System.out.print(users.get(ul).Booked.get(i).seatno.get(j));
                                     }
                                     System.out.println();
                                     System.out.println("Total Amount : "+users.get(ul).Booked.get(i).amount);
-                                    System.out.println("_________________________________________________");
+                                    System.out.println("__________________________________________");
                                 }
                                 int cb = sc.nextInt();
                                 if(cb>=0&&cb<users.get(ul).Booked.size()){
@@ -440,18 +449,18 @@ public class Main{
                                         }
                                     }
                                     for(int i=users.get(ul).Booked.get(cb).from;i<users.get(ul).Booked.get(cb).to;i++){
-                                        for(int j=0;j<users.get(ul).Booked.get(cb).seatnumber.size();j++){
-                                            trains.get(tind).arr[i][users.get(ul).Booked.get(cb).seatnumber.get(j)]=0;
+                                        for(int j=0;j<users.get(ul).Booked.get(cb).seatno.size();j++){
+                                            trains.get(tind).arr[i][users.get(ul).Booked.get(cb).seatno.get(j)]=0;
                                         }
                                     }
                                     users.get(ul).wallet+=users.get(ul).Booked.get(cb).amount;
                                     users.get(ul).Booked.remove(cb);
                                     System.out.println("Ticket Cancelled Successfully");
-                                    System.out.println("_________________________________________________");
+                                    System.out.println("__________________________________________");
                                 }
                                 else{
                                     System.out.println("Ticket not cancelled");
-                                    System.out.println("_________________________________________________");
+                                    System.out.println("__________________________________________");
                                 }
                                 break;
                                 case 3:for(int i=0;i<users.get(ul).Booked.size();i++){
@@ -459,17 +468,17 @@ public class Main{
                                     System.out.println("From : "+users.get(ul).Booked.get(i).from);
                                     System.out.println("To : "+users.get(ul).Booked.get(i).to);
                                     System.out.print("Booked Seats : ");
-                                    for(int j=0;j<users.get(ul).Booked.get(i).seatnumber.size();j++){
-                                        System.out.print(users.get(ul).Booked.get(i).seatnumber.get(j));
+                                    for(int j=0;j<users.get(ul).Booked.get(i).seatno.size();j++){
+                                        System.out.print(users.get(ul).Booked.get(i).seatno.get(j)+",");
                                     }
                                     System.out.println();
                                     System.out.println("Total Amount : "+users.get(ul).Booked.get(i).amount);
-                                    System.out.println("_________________________________________________");
+                                    System.out.println("__________________________________________");
                                 }
                                 break;
                                 case 4:System.out.println("Available Balance is : "+users.get(ul).wallet);
                                 break;
-                                case 5:System.out.println("Enter the amount you want to added : ");
+                                case 5:System.out.println("Enter the amount you want to add : ");
                                 int am = sc.nextInt();
                                 if(am>0){
                                     users.get(ul).wallet+=am;
@@ -478,13 +487,13 @@ public class Main{
                                     System.out.println("Enter a valid amount");
                                 }
                                 break;
-                                case 6:user_exit_status = true;
+                                case 6:user_exit = true;
                                 break;
                                 default : System.out.println("Enter a valid option");
                             }
                         }
                     }else{
-                        System.out.println("Enter valid username and password");
+                        System.out.println("Enter valid username / password");
                     }
                 }
                 break;
@@ -493,6 +502,5 @@ public class Main{
                 default:System.out.println("Enter a valid option");
             }
         }
-       
     }
 }
