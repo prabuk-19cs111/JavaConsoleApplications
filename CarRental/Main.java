@@ -299,24 +299,24 @@ public class Main{
                                
                                     if(ind!=-1){
                                     System.out.println("Enter the Day You Want to Pickup the car : in (dd-mm-yyyy)");
-                                    String pdate = sc.next();
+                                    String dateu = sc.next();
                                     System.out.println("Enter the time You Want to Pickup the car : in (HH:MM)");
                                     String ptime = sc.next();
-                                    String ppickup =pdate+" "+ptime;
+                                    String pickupu =dateu+" "+ptime;
                                     System.out.println("Enter the Day You Want to return the car : in (dd-mm-yyyy)");
                                     String ddate = sc.next();
                                     System.out.println("Enter the time You Want to return the car : in (HH:MM)");
                                     String dtime = sc.next();
-                                    String ddrop = ddate+" "+dtime;
-                                    long ad = avail_date(cars.get(ind),ppickup,ddrop);
+                                    String dropu = ddate+" "+dtime;
+                                    long ad = avail_date(cars.get(ind),pickupu,dropu);
                                     if(ad!=-1){
                                     System.out.println("Total Amount is : "+ad);
                                     System.out.println("Do You Wish to book ?");
                                     System.out.println("Press 0 to confirm");
                                     int con = sc.nextInt();
                                     if(con==0){
-                                    Date pickup = f.parse(ppickup);
-                                    Date drop = f.parse(ddrop);
+                                    Date pickup = f.parse(pickupu);
+                                    Date drop = f.parse(dropu);
                                     Booked bk = new Booked();
                                     bk.pickup = pickup;
                                     bk.drop = drop;
