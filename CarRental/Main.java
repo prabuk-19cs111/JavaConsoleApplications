@@ -152,10 +152,10 @@ public class Main{
         ArrayList<Admin> admins =new ArrayList<>();
         User a = new User();
         User b = new User();
-        a.name="user1";
-        a.password="1111";
-        b.name="user2";
-        b.password="2222";
+        a.name="usera";
+        a.password="aaaa";
+        b.name="userb";
+        b.password="bbbb";
         users.add(a);
         users.add(b);
         Car c1 = new Car();
