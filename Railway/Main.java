@@ -170,15 +170,29 @@ public class Main{
         int[][] a = new int[t1.stations][t1.seats];
         t1.arr = a;
         User u1 = new User();
-        u1.name = "user1";
-        u1.pin = "1111";
+        User u2 = new User();
+        User u3 = new User();
+        u1.name = "usera";
+        u1.pin = "aaaa";
         u1.wallet = 5000;
+        u2.name = "userb";
+        u2.pin = "bbbb";
+        u2.wallet = 10000;
+        u3.name = "userc";
+        u3.pin = "cccc";
+        u3.wallet = 1000;
         Admin a1 = new Admin();
         a1.name = "admin1";
         a1.pin = "111";
+        Admin a2 = new Admin();
+        a2.name = "admin2";
+        a2.pin = "222";
         trains.add(t1);
         users.add(u1);
+        users.add(u2);
+        users.add(u3);
         admins.add(a1);
+        admins.add(a2);
         Boolean whole_exit=false;
         while(!whole_exit){
             System.out.println("1-Admin");
@@ -468,7 +482,7 @@ public class Main{
                             }
                         }
                     }else{
-                        System.out.println("Enter valid credentils");
+                        System.out.println("Enter valid name and password");
                     }
                 }
                 break;
