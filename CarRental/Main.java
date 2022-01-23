@@ -9,31 +9,25 @@ class Booked{
     Date pickup;
     Date drop;
     String user;
-
 }
-
 class Bill{
     Date pickup;
     Date drop;
     int id;
-    int amt;
+    int amount;
 }
-
-
 class Car{
     int id;
-    int nos;
+    int noofseats;
     int pay;
     ArrayList<Booked> time = new ArrayList<>();
 }
-
 class User{
     String name;
     String password;
     ArrayList<Bill> bookedcar = new ArrayList<>();
    
 }
-
 public class Main{
     public static int loginuser(ArrayList<User> x){
         Scanner sc = new Scanner(System.in);
@@ -49,7 +43,6 @@ public class Main{
         }
         return ans;
     }
-
     public static User reguser(ArrayList<User> x){
         Scanner sc=new Scanner(System.in);
         User z = new User();
@@ -100,8 +93,6 @@ public class Main{
         return res;
     }
 
-
-
     public static Car addcars(ArrayList<Car> x){
         Scanner sc=new Scanner(System.in);
         Car z = new Car();
@@ -117,7 +108,7 @@ public class Main{
         int nocs=sc.nextInt();
         System.out.println("Enter pay per hour");
         int cpay=sc.nextInt();
-        z.nos=nocs;
+        z.noofseats=nocs;
         z.pay=cpay;
         if(!cond){
             z.id=carid;
@@ -125,7 +116,35 @@ public class Main{
             z.id=-1;
         }
         return z;
-
+    }
+    public static ArrayList<Integer> editcar(ArrayList<Car> x){
+        Scanner sc = new Scanner(System.in);
+        ArrayList<Integer> n = new ArrayList<>();
+        for(int i=0;i<x.size();i++){
+            System.out.println(i+"-"+x.get(i).id);
+        }
+        System.out.println("Choose the car to edit : ");
+        int ch = sc.nextInt();
+        if(ch>=0 && ch<x.size()){
+            System.out.println("Enter 0 for Number Of Seats");
+            System.out.println("Enter 1 for pay");
+            System.out.println("Choose The option You Should Edit : ");
+            n.add(ch);
+            int opt = sc.nextInt();
+            if(opt<2&&opt>-1){
+                System.out.println("Enter what it needs to be : ");
+                int val = sc.nextInt();
+                n.add(opt);
+                n.add(val);
+            }
+            else{
+                n.add(-1);
+            }
+        }
+        else{
+            n.add(-1);
+        }
+        return n;
     }
 
     public static int  delcars(ArrayList<Car> x){
@@ -141,9 +160,6 @@ public class Main{
         return ans;
 
     }
-
-
-
     public static void main(String[] args) throws Exception {
         SimpleDateFormat f = new SimpleDateFormat("dd-MM-yyyy HH:mm");
         Scanner sc=new Scanner(System.in);
@@ -164,12 +180,12 @@ public class Main{
         c1.id=11;
         c2.id=22;
         c3.id=33;
-        c1.nos=5;
-        c2.nos=11;
-        c3.nos=4;
-        c1.pay=500;
-        c2.pay=1000;
-        c3.pay=2000;
+        c1.noofseats=5;
+        c2.noofseats=11;
+        c3.noofseats=4;
+        c1.pay=100;
+        c2.pay=200;
+        c3.pay=500;
         cars.add(c1);
         cars.add(c2);
         cars.add(c3);
@@ -191,6 +207,7 @@ public class Main{
             int choice = sc.nextInt();
             switch(choice){
                 case 1:int i=loginadmin(admins);
+                System.out.println("WELCOME ADMIN :) ");
                 if(i!=-1){
                     Boolean admin_exit_status=false;
                     while(!admin_exit_status){
@@ -205,40 +222,41 @@ public class Main{
                         switch(ch){
                             case 1: Car q = addcars(cars);
                             cars.add(q);
+                            System.out.println("car added successfully");
+                            System.out.println("_______________________________________________");
                             break;
                             case 2: int d = delcars(cars);
                             if(d!=-1){
                             cars.remove(d);
                             System.out.println("cars available");
                             System.out.println(cars);
+                            System.out.println("_______________________________________________");
                             }
                             break;
-                            case 3:for(int j=0;j<cars.size();j++){
-                                System.out.println(j+"  - car_id = "+cars.get(j).id + " - no.of seats = "+cars.get(j).nos + " - payperhour = "+cars.get(j).pay);
-                                System.out.println("_______________________________________________________");
-                            }
-                            System.out.println("CAR to be edited");
-                            int ind=sc.nextInt();
-                            System.out.println("Enter 0 for to edit no.of seats in car");
-                            System.out.println("Enter 1 for to edit pat in car");
-                            int c=sc.nextInt();
-                            if(c==0){
-                                System.out.println("no.of seats to be updated");
-                                int us=sc.nextInt();
-                                cars.get(ind).nos=us;
-                            }
-                            else if(c==1){
-                                System.out.println("payperhour to be updated");
-                                int pp=sc.nextInt();
-                                cars.get(ind).pay=pp;
+                            case 3:ArrayList<Integer> edcar = editcar(cars);
+                            if(edcar.get(0)!=-1){
+                                if(edcar.get(1)!=-1){
+                                    if(edcar.get(1)==0){
+                                        cars.get(edcar.get(0)).noofseats=edcar.get(2);
+                                        System.out.println("No.of seats edited");
+                                        System.out.println("_______________________________________________");
+                                    }
+                                    else{
+                                        cars.get(edcar.get(0)).pay=edcar.get(2);
+                                        System.out.println("Pay edited");
+                                        System.out.println("_______________________________________________");
+                                    }
+                                }
+                                else{
+                                    System.out.println("Enter a valid Option");
+                                }
                             }
                             else{
-                                System.out.println("Enter valid option");
+                                System.out.println("Enter a valid option");
                             }
-
                             break;
                             case 6:for(int j=0;j<cars.size();j++){
-                                System.out.println("car_id = "+cars.get(j).id + " - no.of seats = "+cars.get(j).nos + " - payperhour = "+cars.get(j).pay);
+                                System.out.println("car_id = "+cars.get(j).id + " - no.of seats = "+cars.get(j).noofseats + " - payperhour = "+cars.get(j).pay);
                                 System.out.println("_______________________________________________________");
                             }
                             break;
@@ -273,7 +291,7 @@ public class Main{
                             int ch=sc.nextInt();
                             switch(ch){
                                 case 1: for(int j=0;j<cars.size();j++){
-                                    System.out.println(j+"  - car_id = "+cars.get(j).id + " - no.of seats = "+cars.get(j).nos + " - payperhour = "+cars.get(j).pay);
+                                    System.out.println(j+"  - car_id = "+cars.get(j).id + " - no.of seats = "+cars.get(j).noofseats + " - payperhour = "+cars.get(j).pay);
                                     System.out.println("_______________________________________________________");
                                 }
                                 System.out.println("Car to be booked");
@@ -285,18 +303,18 @@ public class Main{
                                     System.out.println("Enter the time You Want to Pickup the car : in (HH:MM)");
                                     String ptime = sc.next();
                                     String ppickup =pdate+" "+ptime;
-                                    System.out.println("Enter the Day You Want to drop the car : in (dd-mm-yyyy)");
+                                    System.out.println("Enter the Day You Want to return the car : in (dd-mm-yyyy)");
                                     String ddate = sc.next();
-                                    System.out.println("Enter the time You Want to drop the car : in (HH:MM)");
+                                    System.out.println("Enter the time You Want to return the car : in (HH:MM)");
                                     String dtime = sc.next();
                                     String ddrop = ddate+" "+dtime;
                                     long ad = avail_date(cars.get(ind),ppickup,ddrop);
                                     if(ad!=-1){
                                     System.out.println("Total Amount is : "+ad);
                                     System.out.println("Do You Wish to book ?");
-                                    System.out.println("Press 1 to confirm");
+                                    System.out.println("Press 0 to confirm");
                                     int con = sc.nextInt();
-                                    if(con==1){
+                                    if(con==0){
                                     Date pickup = f.parse(ppickup);
                                     Date drop = f.parse(ddrop);
                                     Booked bk = new Booked();
@@ -305,12 +323,13 @@ public class Main{
                                     bk.user = users.get(l).name;
                                     cars.get(ind).time.add(bk);
                                     Bill bill = new Bill();
-                                    bill.amt = (int)ad;
+                                    bill.amount = (int)ad;
                                     bill.pickup = pickup;
                                     bill.drop = drop;
                                     bill.id = cars.get(ind).id;
                                     users.get(l).bookedcar.add(bill);
-                                    System.out.println("Booked Successflly");
+                                    System.out.println(" Car Booked Successflly");
+                                    System.out.println("_______________________________________________");
                                     }
                                     else{
                                     System.out.println("Booking Cancelled By User");
@@ -326,8 +345,8 @@ public class Main{
                                     case 2:for(int j=0;j<users.get(l).bookedcar.size();j++){
                                         System.out.println("Car ID : "+users.get(l).bookedcar.get(j).id);
                                         System.out.println("Pickup Time : "+users.get(l).bookedcar.get(j).pickup);
-                                        System.out.println("Drop Time : "+users.get(l).bookedcar.get(j).drop);
-                                        System.out.println("Total Amount : "+users.get(l).bookedcar.get(j).amt);
+                                        System.out.println("return Time : "+users.get(l).bookedcar.get(j).drop);
+                                        System.out.println("Total Amount : "+users.get(l).bookedcar.get(j).amount);
                                         }
                                         System.out.println("Enter The car ID You want to book : ");
                                         int caID = sc.nextInt();
@@ -351,19 +370,22 @@ public class Main{
                                         }
                                         users.get(l).bookedcar.remove(Hcarindex);
                                         cars.get(carindex).time.remove(tcarindex);
-                                       
+                                        System.out.println("booking cancelled successfully");
+                                        
                                        
                                         break;
                                         case 3:for(int j=0;j<users.get(l).bookedcar.size();j++){
                                             System.out.println("Car ID : "+users.get(l).bookedcar.get(j).id);
                                             System.out.println("Pickup Time : "+users.get(l).bookedcar.get(j).pickup);
-                                            System.out.println("Drop Time : "+users.get(l).bookedcar.get(j).drop);
-                                            System.out.println("Total Amount : "+users.get(l).bookedcar.get(j).amt);
+                                            System.out.println("return Time : "+users.get(l).bookedcar.get(j).drop);
+                                            System.out.println("Total Amount : "+users.get(l).bookedcar.get(j).amount);
+                                            System.out.println("_______________________________________________");
                                             }
                                             break;
                                 
                                 
-                                        case 4:user_exit_status=true;
+                                        case 4:System.out.println("Logged out successfully");
+                                        user_exit_status=true;
                                         break;
                                         default : System.out.println("Enter valid option");
 
@@ -371,6 +393,9 @@ public class Main{
                             
                         }
 
+                    }
+                    else{
+                        System.out.println("Enter valid username and password");
                     }
                 }
                    
@@ -381,6 +406,7 @@ public class Main{
                     default:System.out.println("Enter a valid choice");
                 }    
         }
-        System.out.println("Come again");
+        System.out.println("Come again :)");
+        System.out.println("_______________________________________________");
     }
 }
