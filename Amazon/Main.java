@@ -236,13 +236,13 @@ public static Merchant createmerchant(){
         merchant_list.add(m1);
         merchant_list.add(m2);
         m1.name="apple";
-        m1.password="aaaa";                                            //merchant apple is approved by default but merchant samsung is not approved by default.
+        m1.password="aaaa";                //merchant apple is approved by default but merchant samsung is not approved by default.
         m1.approval=true;
         m2.name="samsung";
         m2.password="ssss";
         HashMap<String,String> x = new HashMap<>();
         x.put("name", "rog");
-        x.put("price","100000");
+        x.put("price","
         x.put("category", "Electronics");
         x.put("Merchant","apple");
         HashMap<String,String> y = new HashMap<>();
@@ -255,6 +255,8 @@ public static Merchant createmerchant(){
         ArrayList<String> categ =new ArrayList<>();
         ArrayList<User> users =new ArrayList<>();
         User u1 = new User();
+        User u2 = new User();
+        User u3 = new User();
         u1.name = "usera";
         u1.password = "aaaa";
         users.add(u1);
@@ -428,7 +430,6 @@ public static Merchant createmerchant(){
         break;
                 case 4: whole_exit_status=true;
                 break;
-
                 default:System.out.println("Enter a valid choice");
             }
         }
