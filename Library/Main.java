@@ -199,13 +199,13 @@ public class Main{
         Admin ad2=new Admin();
         Admin ad3=new Admin();
         a.username="usera";
-        a.password="1111";
+        a.password="aaaa";
         a.deposit=1000;
-        b.username="useco";
-        b.password="2222";
+        b.username="userb";
+        b.password="bbbb";
         b.deposit=5000;
         c.username="userc";
-        c.password="3333";
+        c.password="cccc";
         c.deposit=400;
         ad1.adminname="admin1";
         ad1.password="111";
