@@ -26,7 +26,7 @@ class Ticket{
     int amount;
 }
 
-class Main{
+public class Main{
     public static Train addtrain(ArrayList<Train> x){
         Scanner sc = new Scanner(System.in);
         Train t = new Train();
