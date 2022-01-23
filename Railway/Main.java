@@ -2,13 +2,13 @@ import java.util.*;
 
 class User{
     String name;
-    String pin;
+    String password;
     int wallet=5000;
     ArrayList<Ticket> Booked = new ArrayList<>();
 }
 class Admin{
     String name;
-    String pin;
+    String password;
 }
 class Train{
     int id;
@@ -30,10 +30,10 @@ public class Main{
     public static Train addtrain(ArrayList<Train> x){
         Scanner sc = new Scanner(System.in);
         Train t = new Train();
-        System.out.println("Enter Train Name : ");
-        t.name = sc.nextLine();
         System.out.println("Enter Train Id : ");
         int id = sc.nextInt();
+        System.out.println("Enter Train Name : ");
+        t.name = sc.nextLine();
         System.out.println("Enter Ticket rate : ");
         int trate = sc.nextInt();
         System.out.println("Enter Number Of Stations : ");
@@ -75,10 +75,10 @@ public class Main{
         System.out.println("1-Ticket Amount");
         System.out.println("2-Number Of Seats");
         System.out.println("3-Number Of Stations");
-        System.out.println("Enter The choice You Want To Enter (1-3) : ");
-        int fie = sc.nextInt();
-        System.out.println("Enter the value You want It to be Edited : ");
-        int val = sc.nextInt();
+        System.out.println("Enter The choice to be edited : ");
+        int f = sc.nextInt();
+        System.out.println("Enter the value to be Edited : ");
+        int v = sc.nextInt();
         int ind = -1;
         for(int i=0;i<x.size();i++){
             if(x.get(i).id==id){
@@ -87,8 +87,8 @@ public class Main{
         }
         res.add(ind);
         if(ind!=-1){
-            res.add(fie);
-            res.add(val);
+            res.add(f);
+            res.add(v);
         }
         return res;
     }
@@ -110,49 +110,49 @@ public class Main{
         return res;
     }
     
-    public static int valid_admin(ArrayList<Admin> x){
+    public static int adminlogin(ArrayList<Admin> x){
         Scanner sc = new Scanner(System.in);
         int res = -1;
         System.out.println("Enter Your Name : ");
         String name = sc.next();
-        System.out.println("Enter Your PIN : ");
-        String pin = sc.next();
+        System.out.println("Enter Your Password : ");
+        String password = sc.next();
         for(int i=0;i<x.size();i++){
-            if(x.get(i).name.equals(name)&&x.get(i).pin.equals(pin)){
+            if(x.get(i).name.equals(name)&&x.get(i).password.equals(password)){
                 res=i;
             }
         }
         return res;
     }
-    public static int valid_user(ArrayList<User> x){
+    public static int userlogin(ArrayList<User> x){
         Scanner sc = new Scanner(System.in);
         int res = -1;
         System.out.println("Enter Your Name : ");
         String name = sc.next();
-        System.out.println("Enter Your PIN : ");
-        String pin = sc.next();
+        System.out.println("Enter Your Password : ");
+        String password = sc.next();
         for(int i=0;i<x.size();i++){
-            if(x.get(i).name.equals(name)&&x.get(i).pin.equals(pin)){
+            if(x.get(i).name.equals(name)&&x.get(i).password.equals(password)){
                 res=i;
             }
         }
         return res;
     }
-    public static User reg_user(ArrayList<User> x){
+    public static User reguser(ArrayList<User> x){
         Scanner sc = new Scanner(System.in);
         User y = new User();
         y.wallet=0;
         System.out.println("Enter Your username : ");
         String name = sc.nextLine();
-        System.out.println("Enter Your PIN : ");
-        String pin = sc.nextLine();
+        System.out.println("Enter Your Password : ");
+        String password = sc.nextLine();
         for(int i=0;i<x.size();i++){
             if(x.get(i).name==name){
                 y.wallet = -1;
             }
         }
         y.name = name;
-        y.pin = pin;
+        y.password = password;
         return y;
        
     }
@@ -163,30 +163,30 @@ public class Main{
         ArrayList<Admin> admins = new ArrayList<>();
         Train t1 = new Train();
         t1.id = 1;
-        t1.amount = 20;
+        t1.amount = 50;
         t1.name = "Bombay express";
-        t1.stations = 5; 
-        t1.seats  =10;
+        t1.stations = 4; 
+        t1.seats  =60;
         int[][] a = new int[t1.stations][t1.seats];
         t1.arr = a;
         User u1 = new User();
         User u2 = new User();
         User u3 = new User();
         u1.name = "usera";
-        u1.pin = "aaaa";
+        u1.password = "aaaa";
         u1.wallet = 5000;
         u2.name = "userb";
-        u2.pin = "bbbb";
+        u2.password = "bbbb";
         u2.wallet = 10000;
         u3.name = "userc";
-        u3.pin = "cccc";
+        u3.password = "cccc";
         u3.wallet = 1000;
         Admin a1 = new Admin();
         a1.name = "admin1";
-        a1.pin = "111";
+        a1.password = "111";
         Admin a2 = new Admin();
         a2.name = "admin2";
-        a2.pin = "222";
+        a2.password = "222";
         trains.add(t1);
         users.add(u1);
         users.add(u2);
@@ -200,9 +200,10 @@ public class Main{
             System.out.println("3-Exit");
             int ch = sc.nextInt();
             switch(ch){
-                case 1:int al = valid_admin(admins);
+                case 1:int al = adminlogin(admins);
                 if(al!=-1){
                     Boolean admin_exit_status = false;
+                    System.out.println("Welcome " +admins.get(al).name);
                     while(!admin_exit_status){
                         System.out.println("1-Add Trains");
                         System.out.println("2-Remove Trains");
@@ -274,14 +275,15 @@ public class Main{
                     }
                 }
                 else{
-                    System.out.println("Enter valid credentials ");
+                    System.out.println("Enter valid adminname & password ");
+                    Sysetm.out.println("please login again");
                 }
                 break;
                 case 2:System.out.println("1-New User");
                 System.out.println("2-Existing User");
                 int ur = sc.nextInt();
                 switch(ur){
-                    case 1:User x = reg_user(users);
+                    case 1:User x = reguser(users);
                     if(x.wallet!=-1){
                         users.add(x);
                     }
@@ -289,9 +291,9 @@ public class Main{
                         System.out.println("Username not availabale");
                     }
                     break;
-                    case 2:int ul = valid_user(users);
+                    case 2:int ul = userlogin(users);
                     if(ul!=-1){
-                        System.out.println("Login Successful");
+                        System.out.println("Welcome " +users.get(ul).name);
                         Boolean user_exit_status=false;
                         while(!user_exit_status){
                             System.out.println("1-Book Tickets");
@@ -371,13 +373,13 @@ public class Main{
                                                             trains.get(ind).arr[j][i]=1;
                                                         }
                                                     }
-                                                    Ticket tick = new Ticket();
-                                                    tick.amount = tamount;
-                                                    tick.from = from;
-                                                    tick.to = to;
-                                                    tick.seatnumber = seats;
-                                                    tick.train = trains.get(ind).id;
-                                                    users.get(ul).Booked.add(tick);
+                                                    Ticket t = new Ticket();
+                                                    t.amount = tamount;
+                                                    t.from = from;
+                                                    t.to = to;
+                                                    t.seatnumber = seats;
+                                                    t.train = trains.get(ind).id;
+                                                    users.get(ul).Booked.add(t);
                                                     users.get(ul).wallet-=tamount;
                                                     System.out.println("Booked Successfully");
                                                 }
@@ -391,12 +393,12 @@ public class Main{
                                                         trains.get(ind).arr[j][i]=1;
                                                     }
                                                 }
-                                                Ticket tick = new Ticket();
-                                                tick.amount = tamount;
-                                                tick.from = from;
-                                                tick.to = to;
-                                                tick.train = trains.get(ind).id;
-                                                users.get(ul).Booked.add(tick);
+                                                Ticket t = new Ticket();
+                                                t.amount = tamount;
+                                                t.from = from;
+                                                t.to = to;
+                                                t.train = trains.get(ind).id;
+                                                users.get(ul).Booked.add(t);
                                             }
                                             break;
                                             
@@ -482,7 +484,7 @@ public class Main{
                             }
                         }
                     }else{
-                        System.out.println("Enter valid name and password");
+                        System.out.println("Enter valid username and password");
                     }
                 }
                 break;
