@@ -242,7 +242,7 @@ public static Merchant createmerchant(){
         m2.password="ssss";
         HashMap<String,String> x = new HashMap<>();
         x.put("name", "rog");
-        x.put("price","
+        x.put("price","20000");
         x.put("category", "Electronics");
         x.put("Merchant","apple");
         HashMap<String,String> y = new HashMap<>();
